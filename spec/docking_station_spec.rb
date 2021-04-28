@@ -2,8 +2,12 @@ require "./lib/docking_station.rb"
 
 describe DockingStation do
     describe ".new" do
-      context "when given argument to new dockingstation" do
+      context "when given argument to new docking station" do
         it { expect { DockingStation.new(40) }.not_to raise_error(ArgumentError) }
+        it { expect(DockingStation.new(40).capacity).to eq(40) }
+      end
+      context "when no argument given to docking station" do
+        it { expect(DockingStation.new.capacity).to eq(20) }
       end
     end
     describe "#release_bike" do
