@@ -4,13 +4,20 @@ class DockingStation
   def initialize
     @bikes = []
   end
-
   def release_bike
-    raise 'No bikes available' if @bikes.empty?
+    raise 'No bikes available' if empty?
     Bike.new
   end
   def dock(bike)
-    raise 'Docking station full' if @bikes.length >= 20
+    raise 'Docking station full' if full?
     @bikes.push(bike)
+  end
+  
+  private
+  def full?
+    @bikes.length >= 20
+  end
+  def empty?
+    @bikes.empty?
   end
 end
