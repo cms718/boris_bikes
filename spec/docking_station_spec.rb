@@ -1,6 +1,11 @@
 require "./lib/docking_station.rb"
 
 describe DockingStation do
+    describe ".new" do
+      context "when given argument to new dockingstation" do
+        it { expect { DockingStation.new(40) }.not_to raise_error(ArgumentError) }
+      end
+    end
     describe "#release_bike" do
       subject { DockingStation.new }
         it { is_expected.to respond_to(:release_bike) } 
