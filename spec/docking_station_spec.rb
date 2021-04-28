@@ -7,8 +7,18 @@ describe DockingStation do
     end
 
     describe "#release_bike returns an object that responds #working?" do
-      subject { DockingStation.new.release_bike }
-      it { is_expected.to respond_to(:working?) }
+      context 'when a bike has been docked' do
+        let (:station) { DockingStation.new }
+        let (:bike) { Bike.new }
+        before { station.dock bike }
+        it 'returns an object that responds to #working' do
+          expect(station).to respond_to(:release_bike)
+        end
+      end
+    end
+
+    describe '#release_bike raises an error when there are no bikes in dock' do
+      it { expect { DockingStation.new.release_bike }.to raise_error('No bikes available') }
     end
 
     describe "#dock" do
