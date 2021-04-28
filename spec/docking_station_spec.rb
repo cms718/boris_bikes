@@ -33,11 +33,11 @@ describe DockingStation do
         before { station.dock bike }
         it { expect(station.bikes).to eq([bike]) }
       end
-      describe "#dock raises and error when 20 bikes already docked" do
+      describe "#dock raises and error when #{DockingStation::DEFAULT_CAPACITY} bikes already docked" do
         let (:station) { DockingStation.new }
         let (:bike) { Bike.new }
         let (:bike_two) { Bike.new }
-        before { 20.times { station.dock bike }}
+        before { DockingStation::DEFAULT_CAPACITY.times { station.dock bike }}
         it { expect { station.dock(bike_two) }.to raise_error('Docking station full') }
       end
     end
