@@ -12,7 +12,7 @@ describe DockingStation do
         let (:bike) { Bike.new }
         before { station.dock bike }
         it 'returns an object that responds to #working' do
-          expect(station).to respond_to(:release_bike)
+          expect(station.release_bike).to respond_to(:working?)
         end
       end
     end
@@ -32,6 +32,13 @@ describe DockingStation do
         let (:bike) { Bike.new }
         before { station.dock bike }
         it { expect(station.bike).to eq(bike) }
+      end
+      describe "#dock raises and error when bike already docked" do
+        let (:station) { DockingStation.new }
+        let (:bike) { Bike.new }
+        let (:bike_two) { Bike.new }
+        before { station.dock bike }
+        it { expect { station.dock(bike_two) }.to raise_error('Docking station full') }
       end
     end
 end
