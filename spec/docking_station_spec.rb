@@ -31,13 +31,13 @@ describe DockingStation do
         let (:station) { DockingStation.new }
         let (:bike) { Bike.new }
         before { station.dock bike }
-        it { expect(station.bike).to eq(bike) }
+        it { expect(station.bikes).to eq([bike]) }
       end
-      describe "#dock raises and error when bike already docked" do
+      describe "#dock raises and error when 20 bikes already docked" do
         let (:station) { DockingStation.new }
         let (:bike) { Bike.new }
         let (:bike_two) { Bike.new }
-        before { station.dock bike }
+        before { 20.times { station.dock bike }}
         it { expect { station.dock(bike_two) }.to raise_error('Docking station full') }
       end
     end
